@@ -1,0 +1,21 @@
+{
+    "name": "oromedialab/zf2-lazy-form",
+    "description": "Zend Framework 2 - Lazy form for lazy ass",
+    "license": "MIT",
+    "keywords": ["zf2-form", ["zf2-lazy-form"]],
+    "authors": [
+        {
+            "name": "Ibrahim Azhar Armar",
+            "email": "azhar@iarmar.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-form": "~2.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oml\\Zf2LazyForm\\": "src/"
+        },
+        "classmap": ["Module.php"]
+    }
+}
