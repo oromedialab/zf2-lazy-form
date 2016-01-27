@@ -12,4 +12,5 @@ composer.phar require oromedialab/zf2-extended-form dev-master
 git clone https://github.com/oromedialab/zf2-extended-form.git
 ```
 
-##### Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config.php` file.
+#### Enable Zf2 Module
+Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config.php` file.
