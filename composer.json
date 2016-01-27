@@ -2,7 +2,7 @@
     "name": "oromedialab/zf2-lazy-form",
     "description": "Zend Framework 2 - Lazy form for lazy ass",
     "license": "MIT",
-    "keywords": ["zf2-form", ["zf2-lazy-form"]],
+    "keywords": ["zf2-form", "zf2-lazy-form"],
     "authors": [
         {
             "name": "Ibrahim Azhar Armar",
