@@ -17,9 +17,9 @@ Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config
 
 Now that you have installed and enabled some module, lets try creating a simple form element
 
+```php
 use Oml\Zf2LazyForm\Form\Base;
 
-```
 class MyForm extends Base
 {
 	public function __construct($name = null)
