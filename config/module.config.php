@@ -16,11 +16,10 @@ return [
 					'type' => 'submit'
 				]
 			],
-			'options' => [
-
-			],
+			'options' => [],
 			'validators' => [
-				'not_empty' => ['name' => 'NotEmpty']
+				'not_empty' => ['name' => 'NotEmpty'],
+				'empty' => ['name' => 'Empty']
 			],
 			'filters' => [
 				'strip_tags' => ['name' => 'StripTags'],
@@ -30,6 +29,10 @@ return [
 				1 => [
 					'validators' => ['not_empty'],
 					'filters' => ['strip_tags', 'string_trim']
+				],
+				2 => [
+					'attributes' => ['submit-btn'],
+					'filters' => false
 				]
 			]
 		]
