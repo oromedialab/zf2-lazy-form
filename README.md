@@ -4,7 +4,7 @@ Do you feel lazy while using Zend Form? welcome to the league! we get bored repe
 
 #### Install using composer
 ```
-composer.phar require oromedialab/zf2-extended-form dev-master
+composer require oromedialab/zf2-extended-form dev-master
 ```
 
 #### Install using GIT clone
