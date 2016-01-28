@@ -4,12 +4,12 @@ Do you feel lazy while using Zend Form? welcome to the league! we get bored repe
 
 #### Install using composer
 ```
-composer require oromedialab/zf2-extended-form dev-master
+composer require oromedialab/zf2-lazy-form dev-master
 ```
 
 #### Install using GIT clone
 ```
-git clone https://github.com/oromedialab/zf2-extended-form.git
+git clone https://github.com/oromedialab/zf2-lazy-form.git
 ```
 
 #### Enable Zf2 Module
