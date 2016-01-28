@@ -34,6 +34,6 @@ class MyForm extends Base
 That's it, it added a form element of type text in your form.
 
 
-Features
+#### Features
 	- Short syntax using short names.
 	- Reusable and configurable validators, filters, attrbutes, options.
