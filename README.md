@@ -1,6 +1,17 @@
-Zend Framework 2 - Lazy form for lazy ass
+Lazy Form for Zend Framework 2
 =============
-Do you feel lazy while using Zend Form? welcome to the league! we get bored repeating the same thing over and over again in different places, it's time to change this, we developed this module to reuse all possible sets of form elements by using a simple config file, sounds easy isn't it? lets see some example, but first let's install the module in your ZF2 application, you can install using following options.
+Developed by Ibrahim Azhar Armar
+
+Introduction
+------------
+Did you ever get frustrated by the fact that you have to repeat the same validators, filters, attributes and options over and over again in different forms and elements leading to code duplication and maintenance nightmare ? we have read numerous time about [DRY - Don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself) or [OAOO - Once and Only Once](http://c2.com/cgi/wiki?OnceAndOnlyOnce), the question is do we really follow it ?
+
+Zf2LazyForm module was developed to eliminate duplication and encourage reuse. during the course of development we enhanced the module to support numerous features.
+* Reusable and configurable validators, filters, attrbutes, options
+* Short and easy syntax
+* Define global form elements and attributes
+
+Let's get started by first installing the module in your ZF2 application.
 
 #### Install using composer
 ```
@@ -32,9 +43,3 @@ class MyForm extends Base
 ```
 
 That's it, it added a form element of type text in your form.
-
-
-#### Features (reuse, reuse, reuse)
-	- Reusable and configurable validators, filters, attrbutes, options.
-	- Short syntax using short names.
-	- Create global form elements and attributes
