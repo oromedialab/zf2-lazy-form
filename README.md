@@ -11,8 +11,6 @@ Zf2LazyForm module is developed to eliminate duplication and encourage reuse. du
 * Short and easy syntax
 * Define global form elements and attributes
 
-Let's get started by first installing the module in your ZF2 application.
-
 Installation
 ------------
 
