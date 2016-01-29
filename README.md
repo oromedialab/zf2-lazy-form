@@ -27,8 +27,6 @@ git clone https://github.com/oromedialab/zf2-lazy-form.git
 #### Enable Zf2 Module
 Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config.php` file.
 
-Now that you have installed and enabled some module, lets try creating a simple form element
-
 Example
 ------------
 
