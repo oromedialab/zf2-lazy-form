@@ -256,3 +256,7 @@ Available Options in Config File :
 - `$config['oml']['zf2-lazy-form']['validators']` - Form element validators
 - `$config['oml']['zf2-lazy-form']['filters']` - Form element filters
 - `$config['oml']['zf2-lazy-form']['lazy-set']` - Lazy set for reusable elements
+
+Available Options in Form Class Extending `Oml\Zf2LazyForm\Form\Base` :
+- `addFormElement(array $params)` - Accepts name, type, label and lazy-set
+- `setPlaceholderParameter($name, $value, $elementName = null)` = Replace placeholder with value per form or per element
