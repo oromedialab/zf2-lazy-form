@@ -1,4 +1,10 @@
 <?php
+/**
+ * Module config file
+ *
+ * @author Ibrahin Azhar <azhar@iarmar.com>
+ * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
 
 return [
 	'service_manager' => [
@@ -8,18 +14,30 @@ return [
     ],
 	'oml' => [
 		'zf2-lazy-form' => [
-			'*' => [
-				'method' => 'post'
+			'*' => function(\Zend\Form\Form $form) {
+			},
+			'default' => [
+				'placeholder' => [
+					':min' => 10,
+					':max' => 200
+				]
 			],
 			'attributes' => [
-				'submit-btn' => [
+				'submit_btn' => [
 					'type' => 'submit'
 				]
 			],
 			'options' => [],
 			'validators' => [
 				'not_empty' => ['name' => 'NotEmpty'],
-				'empty' => ['name' => 'Empty']
+				'string_length' => [
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min' => ':min',
+                        'max' => ':max',
+                    )
+				]
 			],
 			'filters' => [
 				'strip_tags' => ['name' => 'StripTags'],
@@ -27,11 +45,11 @@ return [
 			],
 			'lazy-set' => [
 				1 => [
-					'validators' => ['not_empty'],
+					'validators' => ['not_empty', 'string_length'],
 					'filters' => ['strip_tags', 'string_trim']
 				],
 				2 => [
-					'attributes' => ['submit-btn'],
+					'attributes' => ['submit_btn'],
 					'filters' => false
 				]
 			]

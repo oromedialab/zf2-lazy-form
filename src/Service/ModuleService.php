@@ -1,4 +1,10 @@
 <?php
+/**
+ * Manages module service
+ *
+ * @author Ibrahin Azhar <azhar@iarmar.com>
+ * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
 
 namespace Oml\Zf2LazyForm\Service;
 
@@ -7,26 +13,75 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class ModuleService implements ServiceLocatorAwareInterface
 {
+    /**
+     * Instance of service manager
+     *
+     * @var Zend\ServiceManager\ServiceManager
+     */
     protected $serviceLocator;
 
+    /**
+     * Set deep array falst to following elements
+     *
+     * @var array $deepArrayFalse
+     */
     protected $deepArrayFalse = array('attributes', 'options');
 
+    /**
+     * Method applied from ServiceLocatorAwareInterface, required to inject service locator object
+     *
+     * @param ServiceLocatorInterface $sl
+     * @return $this
+     */
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
         $this->serviceLocator = $serviceLocator;
+        return $this;
     }
 
+    /**
+     * Method applied from ServiceLocatorAwareInterface, required to retreive service locator object
+     *
+     * @return Zend\ServiceManager\ServiceManager
+     */
     public function getServiceLocator()
     {
         return $this->serviceLocator;
     }
 
+    /**
+     * Get module config in array format
+     *
+     * @return array
+     */
     public function config()
     {
     	$config = $this->getServiceLocator()->get('config');
     	return $config['oml']['zf2-lazy-form'];
     }
 
+    /**
+     * Get default value for given attribute
+     *
+     * @param string $name
+     * @return array
+     */
+    public function defaultConfig($name)
+    {
+        $config = $this->config();
+        $default = array_key_exists('default', $config) ? $config['default'] : array();
+        if (!array_key_exists($name, $default)) {
+            return array();
+        }
+        return $default[$name];
+    }
+
+    /**
+     * Convert lazy-set format to zend-form compatible array format
+     *
+     * @param string $id
+     * @return array
+     */
     public function lazySet($id)
     {
         $config = $this->config();
@@ -61,7 +116,9 @@ class ModuleService implements ServiceLocatorAwareInterface
     }
 
     /**
-     * Return value if exist, else ignore
+     * Parse config for individual type (attributes, options, validators, filters...)
+     *
+     * @return string|bool
      */
     protected function configParser($type, $attribute)
     {
