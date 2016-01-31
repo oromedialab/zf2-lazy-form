@@ -1,6 +1,6 @@
 Lazy Form for Zend Framework 2
 =============
-Developed by Ibrahim Azhar Armar
+Developed and Maintained by Ibrahim Azhar Armar
 
 Introduction
 ------------
@@ -10,7 +10,7 @@ Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We
 * [Short Syntax](https://github.com/oromedialab/zf2-lazy-form#short-syntax)
 * [Configurable Validators, Filters, Attrbutes & Options](https://github.com/oromedialab/zf2-lazy-form#configurable-validators-filters-attrbutes--options)
 * [Reuse using Lazy Set](https://github.com/oromedialab/zf2-lazy-form#reuse-using-lazy-set)
-* [Placeholders](#)
+* [Placeholders](https://github.com/oromedialab/zf2-lazy-form#placeholders)
 * Refined Error Messages
 * Global Form Elements
 
