@@ -171,7 +171,7 @@ The defined placeholder `:min` and `:max` in above configuration can be replaced
 
 Replace placeholder value on a global level
 ```php
-// Apply placeholder globally
+// Apply global placeholder
 return [
 	'oml' => [
 		'zf2-lazy-form' => [
