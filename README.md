@@ -1,5 +1,7 @@
 Lazy Form for Zend Framework 2
 =============
+
+[![Join the chat at https://gitter.im/oromedialab/zf2-lazy-form](https://badges.gitter.im/oromedialab/zf2-lazy-form.svg)](https://gitter.im/oromedialab/zf2-lazy-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Developed and Maintained by Ibrahim Azhar Armar
 
 Introduction
