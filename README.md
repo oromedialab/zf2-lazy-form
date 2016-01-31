@@ -9,7 +9,7 @@ Did you ever get frustrated by the fact that you have to repeat the same validat
 Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We enhanced the module to support numerous features on top of existing features of zend-form
 * [Short Syntax](https://github.com/oromedialab/zf2-lazy-form#short-syntax)
 * [Configurable Validators, Filters, Attrbutes & Options](https://github.com/oromedialab/zf2-lazy-form#configurable-validators-filters-attrbutes--options)
-* [Reuse using Lazy Set](https://github.com/oromedialab/zf2-lazy-form#reuse-using-lazy-set)
+* [Lazy Set](https://github.com/oromedialab/zf2-lazy-form#reuse-using-lazy-set)
 * [Placeholders](https://github.com/oromedialab/zf2-lazy-form#placeholders)
 * [Global Form Attributes](https://github.com/oromedialab/zf2-lazy-form#global-form-attributes)
 
@@ -105,7 +105,7 @@ return [
 ];
 ```
 
-#### Reuse using Lazy Set
+#### Lazy Set
 Once configuration is defined, it can be reused using lazy-set
 
 ```php
