@@ -31,7 +31,7 @@ Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config
 
 Important Instruction
 ------------
-Form can be initialized using FormElementManager only, lets see an example 
+Form must be initialized using FormElementManager, lets see an example 
 ```php
 // Correct approach
 $sm = $this->getServiceLocator();
