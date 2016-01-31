@@ -247,6 +247,7 @@ An instance of `Zend\Form` is injected by default when you define `$config['oml'
 
 Options
 ------------
-Available Options in Config File
+Available Options in Config File :
 
-- **'*' => function(\Zend\Form\Form $form)** - Define global form elements and attributes using this option
+- **$config['oml']['zf2-lazy-form']['*'] => function(\Zend\Form\Form $form)** - Define global form elements and attributes using this option
+- **$config['oml']['zf2-lazy-form']['default']['placeholder']** - Define default values for placeholder
