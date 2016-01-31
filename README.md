@@ -251,3 +251,8 @@ Available Options in Config File :
 
 - `$config['oml']['zf2-lazy-form']['*'] = function(\Zend\Form\Form $form){}` - Define global form elements and attributes
 - `$config['oml']['zf2-lazy-form']['default']['placeholder']` - Define default values for placeholder
+- `$config['oml']['zf2-lazy-form']['attributes']` - Define form element attributes
+- `$config['oml']['zf2-lazy-form']['options']` - Define form element options
+- `$config['oml']['zf2-lazy-form']['validators']` - Define form element validators
+- `$config['oml']['zf2-lazy-form']['filters']` - Define form element filters
+- `$config['oml']['zf2-lazy-form']['lazy-set']` - Define lazy set for reusable elements
