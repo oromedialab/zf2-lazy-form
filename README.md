@@ -4,12 +4,14 @@ Developed by Ibrahim Azhar Armar
 
 Introduction
 ------------
-Did you ever get frustrated by the fact that you have to repeat the same validators, filters, attributes and options over and over again in different forms and elements leading to code duplication and maintenance nightmare? we have read numerous time about [DRY - Don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself) or [OAOO - Once and Only Once](http://c2.com/cgi/wiki?OnceAndOnlyOnce), the question is do we really follow it?
+Did you ever get frustrated by the fact that you have to repeat the same validators, filters, attributes and options over and over again in different forms and elements leading to code duplication and maintenance nightmare? we have read numerous time about [DRY - Don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself) or [OAOO - Once and Only Once](http://c2.com/cgi/wiki?OnceAndOnlyOnce), but do we really follow it?
 
-Zf2LazyForm module is developed to eliminate duplication and encourage reuse. during the course of development we enhanced the module to support numerous features.
-* Reusable and configurable validators, filters, attrbutes, options
-* Short and easy syntax
-* Define global form elements and attributes
+Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We enhanced the module to support numerous features on top of existing features of zend-form
+* Short Syntax
+* Reusable Validators, Filters, Attrbutes & Options
+* Refined Error Messages
+* Placeholders
+* Global Form Elements
 
 Installation
 ------------
@@ -30,7 +32,7 @@ Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config
 Example
 ------------
 
-#### 1. Basic Element
+#### Short Syntax
 ```php
 use Oml\Zf2LazyForm\Form\Base;
 
@@ -45,4 +47,4 @@ class MyForm extends Base
 }
 ```
 
-That's it, it added a form element of type text in your form.
+#### Reusable Validators, Filters, Attrbutes & Options
