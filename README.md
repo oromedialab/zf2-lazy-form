@@ -65,3 +65,40 @@ When an element is defined using `addFormElement()` by default empty input filte
 
 
 #### Reusable Validators, Filters, Attrbutes & Options
+Define validators, filters, attributes and options in config file to reuse it across forms and elements, 
+
+```php
+return [
+	'oml' => [
+		'zf2-lazy-form' => [
+			'validators' => [
+				'not_empty' => ['name' => 'NotEmpty'],
+				'string_length' => [
+	                'name'    => 'StringLength',
+	                'options' => array(
+	                    'encoding' => 'UTF-8',
+	                    'min' => 2,
+	                    'max' => 255
+	                )
+				]
+			],
+			'filters' => [
+				'strip_tags' => ['name' => 'StripTags'],
+	            'string_trim' => ['name' => 'StringTrim']
+			]
+			'attributes' => [
+				'submit' => [
+					'type' => 'submit',
+					'class' => 'submit-btn'
+				]
+			],
+			'options' => [
+				'label_attributes' => [
+	                'class' => 'col-sm-2 font_16'
+	            ]
+			]
+		]
+	]
+];
+```
+
