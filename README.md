@@ -249,5 +249,5 @@ Options
 ------------
 Available Options in Config File :
 
-- `$config['oml']['zf2-lazy-form']['*'] = function(\Zend\Form\Form $form){}` - Define global form elements and attributes using this option
+- `$config['oml']['zf2-lazy-form']['*'] = function(\Zend\Form\Form $form){}` - Define global form elements and attributes
 - `$config['oml']['zf2-lazy-form']['default']['placeholder']` - Define default values for placeholder
