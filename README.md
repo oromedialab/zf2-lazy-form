@@ -65,7 +65,7 @@ When an element is defined using `addFormElement()` by default empty input filte
 
 
 #### Reusable Validators, Filters, Attrbutes & Options
-Define validators, filters, attributes and options in config file and reuse it across forms and elements
+Define validators, filters, attributes and options in config file and reuse it across forms and elements. the syntax is same as what you use in zend-form
 
 ```php
 return [
@@ -104,3 +104,5 @@ return [
 ];
 ```
 
+##### Introducing lazy-set
+Reuse using lazy-set, 
