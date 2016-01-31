@@ -11,8 +11,7 @@ Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We
 * [Configurable Validators, Filters, Attrbutes & Options](https://github.com/oromedialab/zf2-lazy-form#configurable-validators-filters-attrbutes--options)
 * [Reuse using Lazy Set](https://github.com/oromedialab/zf2-lazy-form#reuse-using-lazy-set)
 * [Placeholders](https://github.com/oromedialab/zf2-lazy-form#placeholders)
-* Refined Error Messages
-* Global Form Elements
+* Global Form Attributes
 
 Installation
 ------------
@@ -223,4 +222,5 @@ class MyForm extends Base
 	}
 }
 
+#### Global Form Attributes
 
