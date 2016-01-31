@@ -1,4 +1,10 @@
 <?php
+/**
+ * Zf2 Module Class
+ *
+ * @author Ibrahim Azhar <azhar@iarmar.com>
+ * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
+ */
 
 namespace Oml\Zf2LazyForm;
 

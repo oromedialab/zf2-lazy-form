@@ -3,7 +3,7 @@
 /**
  * Base form to handle the functions of module
  *
- * @author Ibrahin Azhar <azhar@iarmar.com>
+ * @author Ibrahim Azhar <azhar@iarmar.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
