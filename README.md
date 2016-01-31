@@ -46,7 +46,7 @@ Example
 ------------
 
 #### Short Syntax
-You can use [short names](http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names) offered by ZF2, instead of writing `Zend\Form\Element\Text` for defining form elements, you can just type `text`, same goes for rest of elements.
+You can use [short names](http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names) offered by ZF2, instead of writing `Zend\Form\Element\Text` for defining form elements, you can just type `text`, same goes for rest of elements, let's consider the below example to define form element using short syntax
 ```php
 use Oml\Zf2LazyForm\Form\Base;
 
@@ -61,7 +61,7 @@ class MyForm extends Base
 	}
 }
 ```
-
+When an element is defined using `addFormElement` by default empty input filters are injected, you don't have to worry about defining input filters separately. To be precise you never define input filters in form again, you need to define it in the config file and reuse it across forms and elements
 
 
 #### Reusable Validators, Filters, Attrbutes & Options
