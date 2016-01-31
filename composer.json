@@ -1,6 +1,6 @@
 {
     "name": "oromedialab/zf2-lazy-form",
-    "description": "Zend Framework 2 - Lazy form for lazy ass",
+    "description": "Lazy Form for Zend Framework 2",
     "license": "MIT",
     "keywords": ["zf2-form", "zf2-lazy-form"],
     "authors": [
