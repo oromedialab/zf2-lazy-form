@@ -168,7 +168,8 @@ The defined placeholder `:min` and `:max` in above configuration can be replaced
 * Global
 * Form
 * Element
-To replace placeholder value globally, following config can be used
+
+Replace placeholder value on a global level
 ```php
 // Apply placeholder globally
 return [
@@ -176,7 +177,7 @@ return [
 		'zf2-lazy-form' => [
 			'default' => [
 				'placeholder' => [
-					':min' => 10,
+					':min' => 2,
 					':max' => 200
 				]
 			]
@@ -185,5 +186,41 @@ return [
 ];
 ```
 
+Replace placeholder value on a form level
+```php
+use Oml\Zf2LazyForm\Form\Base;
+
+class MyForm extends Base
+{
+	public function __construct($name = null)
+	{
+		parent::__construct(null);
+
+		// Overwrite :min and :max value for this form
+		$this->setPlaceholderParameter(':min', 20);
+		$this->setPlaceholderParameter(':max', 500);
+
+		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+	}
+}
+```
+
+Replace placeholder value per element
+```php
+use Oml\Zf2LazyForm\Form\Base;
+
+class MyForm extends Base
+{
+	public function __construct($name = null)
+	{
+		parent::__construct(null);
+
+		// Overwrite :min and :max value for first name
+		$this->setPlaceholderParameter(':min', 20, 'first_name');
+		$this->setPlaceholderParameter(':max', 500, 'first_name');
+
+		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+	}
+}
 
 
