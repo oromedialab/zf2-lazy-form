@@ -221,6 +221,7 @@ class MyForm extends Base
 		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
 	}
 }
+```
 
 #### Global Form Attributes
 
