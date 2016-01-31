@@ -108,6 +108,7 @@ return [
 #### Reuse using Lazy Set
 Once configuration is defined, it can be reused using lazy-set
 
+```php
 return [
 	'oml' => [
 		'zf2-lazy-form' => [
@@ -126,6 +127,7 @@ return [
 		]
 	]
 ];
+```
 
 To use lazy set in your form element, you need to define it in each element, refer the example below where we apply `lazy-set = 1` to an element
 
