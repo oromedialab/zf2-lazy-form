@@ -259,4 +259,4 @@ Available Options in Config File :
 
 Available Options in Form Class Extending `Oml\Zf2LazyForm\Form\Base` :
 - `addFormElement(array $params)` - Accepts name, type, label and lazy-set
-- `setPlaceholderParameter($name, $value, $elementName = null)` = Replace placeholder with value per form or per element
+- `setPlaceholderParameter($name, $value, $elementName = null)` = Replace placeholder value for form or element
