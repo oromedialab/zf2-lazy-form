@@ -11,7 +11,7 @@ Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We
 * [Configurable Validators, Filters, Attrbutes & Options](https://github.com/oromedialab/zf2-lazy-form#configurable-validators-filters-attrbutes--options)
 * [Lazy Set](https://github.com/oromedialab/zf2-lazy-form#lazy-set)
 * [Placeholders](https://github.com/oromedialab/zf2-lazy-form#placeholders)
-* [Global Form Attributes](https://github.com/oromedialab/zf2-lazy-form#global-form-attributes)
+* [Global Form Elements and Attributes](https://github.com/oromedialab/zf2-lazy-form#global-form-attributes)
 
 Installation
 ------------
@@ -223,5 +223,27 @@ class MyForm extends Base
 }
 ```
 
-#### Global Form Attributes
+#### Global Form Elements and Attributes
+Most often we use common elements in forms such as, all forms must have a submit button, a csrf token must be included, it must contain specific class names, or bind hydator etc. this can be done easily using closure in your config file
+
+```php
+return [
+	'oml' => [
+		'zf2-lazy-form' => [
+			'*' => function(\Zend\Form\Form $form) {
+				// Apply form attribute
+				$form->setAttribute('class', 'form-horizontal form');
+				// Add an element in the form
+				$form->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'button', 'lazy-set' => 2]);
+				// Set hydrator
+				$form->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods(true));
+			},
+		]
+	]
+];
+```
+An instance of `Zend\Form` is injected by default when you define `$config['oml']['zf2-lazy-form'][*]` with closure, this allows you to modify or add elements to the form on a global level.
+
+Options
+------------
 
