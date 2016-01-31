@@ -29,6 +29,19 @@ git clone https://github.com/oromedialab/zf2-lazy-form.git
 #### Enable Zf2 Module
 Enable the module by adding `Oml\Zf2LazyForm` in your `config/application.config.php` file.
 
+Important Instruction
+------------
+Form can be initialized using FormElementManager only, lets see an example 
+```php
+// Correct approach
+$sm = $this->getServiceLocator();
+$form = $sm->get('FormElementManager')->get('User\Form\Create');
+
+// Incorrect approach
+$sm = $this->getServiceLocator();
+$form = new User\Form\Create();
+```
+
 Example
 ------------
 
@@ -48,5 +61,7 @@ class MyForm extends Base
 	}
 }
 ```
+
+
 
 #### Reusable Validators, Filters, Attrbutes & Options
