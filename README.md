@@ -72,8 +72,8 @@ return [
 	'oml' => [
 		'zf2-lazy-form' => [
 			'validators' => [
-				'not_empty' => ['name' => 'NotEmpty'],
-				'string_length' => [
+				'not-empty' => ['name' => 'NotEmpty'],
+				'string-length' => [
 	                'name'    => 'StringLength',
 	                'options' => array(
 	                    'encoding' => 'UTF-8',
@@ -83,19 +83,21 @@ return [
 				]
 			],
 			'filters' => [
-				'strip_tags' => ['name' => 'StripTags'],
-	            'string_trim' => ['name' => 'StringTrim']
+				'strip-tags' => ['name' => 'StripTags'],
+	            'string-trim' => ['name' => 'StringTrim']
 			]
 			'attributes' => [
-				'submit' => [
+				'attribute-submit-btn' => [
 					'type' => 'submit',
 					'class' => 'submit-btn'
 				]
 			],
 			'options' => [
-				'label_attributes' => [
-	                'class' => 'col-sm-2 font_16'
-	            ]
+				'label-option' => [
+					'label_attributes' => [
+		                'class' => 'col-sm-2 font_16'
+		            ]
+				]
 			]
 		]
 	]
