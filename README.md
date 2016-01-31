@@ -12,7 +12,7 @@ Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We
 * [Lazy Set](https://github.com/oromedialab/zf2-lazy-form#lazy-set)
 * [Placeholders](https://github.com/oromedialab/zf2-lazy-form#placeholders)
 * [Global Form Elements and Attributes](https://github.com/oromedialab/zf2-lazy-form#global-form-elements-and-attributes)
-* [Configurable Error Messages](#)
+* [Configurable Error Messages](#) - @TODO
 
 Installation
 ------------
@@ -260,3 +260,6 @@ Available Options in Config File :
 Available Options in Form Class Extending `Oml\Zf2LazyForm\Form\Base` :
 - `addFormElement(array $params)` - Accepts name, type, label and lazy-set
 - `setPlaceholderParameter($name, $value, $elementName = null)` = Replace placeholder value for form or element
+
+Feel free to use native zend-form functions parallelly with this module if the function offered by this module does not suffice your need. it is designed to avoid conflict with existing `Zend\Form` functionality, hence allowing you to use `add()` or `addFormElement()` together in your form
+
