@@ -42,7 +42,8 @@ class MyForm extends Base
 	{
 		parent::__construct(null);
 
-		$this->addFormElement(['name' => 'name', 'label' => 'Name', 'type' => 'text']);
+		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text']);
+		$this->addFormElement(['name' => 'last_name', 'label' => 'Last name', 'type' => 'text']);
 	}
 }
 ```
