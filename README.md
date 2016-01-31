@@ -46,7 +46,7 @@ Example
 ------------
 
 #### Short Syntax
-You can use [short names](http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names) offered by ZF2, instead of writing `Zend\Form\Element\Text` for defining form elements, you can just type `text`
+You can use [short names](http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names) offered by ZF2, instead of writing `Zend\Form\Element\Text` for defining form elements, you can just type `text`, same goes for rest of elements.
 ```php
 use Oml\Zf2LazyForm\Form\Base;
 
