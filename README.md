@@ -64,7 +64,7 @@ class MyForm extends Base
 ```
 When an element is defined using `addFormElement()` by default empty input filters are injected, you don't have to worry about defining input filters separately. To be precise you never define input filters in form again, instead you define it in the config file and reuse it across forms and elements, we'll see an example of this below
 
-You can use [short names](http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names) offered by ZF2, instead of writing `Zend\Form\Element\Text` for defining form elements, you can just type `text`, same goes for rest of elements, 
+You can also use [short names](http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names) offered by ZF2, instead of writing `Zend\Form\Element\Text` for defining form elements, you can just type `text`, same goes for rest of elements
 
 #### Configurable Validators, Filters, Attrbutes & Options
 Define validators, filters, attributes and options in config file to reuse it across forms and elements. the syntax is same as what you use in zend-form
@@ -143,4 +143,47 @@ $this->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'butto
 ```
 
 #### Placeholders
+In many instances you may want to define different validation values for a given validator. Lets consider `StringLength` where it makes sense to have a default minimum and maximum length for all form elements, however for specific element we may want to overwrite it with specific values, this is where `Placeholders` comes to our rescue, lets see some example
+
+```php
+return [
+	'oml' => [
+		'zf2-lazy-form' => [
+			'validators' => [
+				'not_empty' => ['name' => 'NotEmpty'],
+				'string_length' => [
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min' => ':min',
+                        'max' => ':max',
+                    )
+				]
+			]
+		]
+	]
+];
+```
+The defined placeholder `:min` and `:max` in above configuration can be replaced on 3 level
+* Global
+* Form
+* Element
+To replace placeholder value globally, following config can be used
+```php
+// Apply placeholder globally
+return [
+	'oml' => [
+		'zf2-lazy-form' => [
+			'default' => [
+				'placeholder' => [
+					':min' => 10,
+					':max' => 200
+				]
+			]
+		]
+	]
+];
+```
+
+
 
