@@ -61,7 +61,7 @@ class MyForm extends Base
 	}
 }
 ```
-When an element is defined using `addFormElement` by default empty input filters are injected, you don't have to worry about defining input filters separately. To be precise you never define input filters in form again, instead you define it in the config file and reuse it across forms and elements, we'll see an example of this below
+When an element is defined using `addFormElement()` by default empty input filters are injected, you don't have to worry about defining input filters separately. To be precise you never define input filters in form again, instead you define it in the config file and reuse it across forms and elements, we'll see an example of this below
 
 
 #### Reusable Validators, Filters, Attrbutes & Options
