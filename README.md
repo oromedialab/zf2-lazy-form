@@ -8,7 +8,8 @@ Did you ever get frustrated by the fact that you have to repeat the same validat
 
 Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We enhanced the module to support numerous features on top of existing features of zend-form
 * Short Syntax
-* Reusable Validators, Filters, Attrbutes & Options
+* Configurable Validators, Filters, Attrbutes & Options
+* Reuse using Lazy Set
 * Refined Error Messages
 * Placeholders
 * Global Form Elements
@@ -64,8 +65,8 @@ class MyForm extends Base
 When an element is defined using `addFormElement()` by default empty input filters are injected, you don't have to worry about defining input filters separately. To be precise you never define input filters in form again, instead you define it in the config file and reuse it across forms and elements, we'll see an example of this below
 
 
-#### Reusable Validators, Filters, Attrbutes & Options
-Define validators, filters, attributes and options in config file and reuse it across forms and elements. the syntax is same as what you use in zend-form
+#### Configurable Validators, Filters, Attrbutes & Options
+Define validators, filters, attributes and options in config file to reuse it across forms and elements. the syntax is same as what you use in zend-form
 
 ```php
 return [
@@ -87,7 +88,7 @@ return [
 	            'string-trim' => ['name' => 'StringTrim']
 			]
 			'attributes' => [
-				'attribute-submit-btn' => [
+				'submit-btn' => [
 					'type' => 'submit',
 					'class' => 'submit-btn'
 				]
@@ -104,5 +105,38 @@ return [
 ];
 ```
 
-##### Introducing lazy-set
-Reuse using lazy-set, 
+#### Reuse using Lazy Set
+Once configuration is defined, it can be reused using lazy-set
+
+return [
+	'oml' => [
+		'zf2-lazy-form' => [
+			'lazy-set' => [
+				1 => [
+					'validators' => ['not-empty', 'string-length'],
+					'filters' => ['strip-tags', 'string-trim'],
+					'attributes' => ['submit-btn'],
+					'options' => ['label-option']
+				],
+				2 => [
+					'attributes' => ['submit-btn'],
+					'filters' => false
+				]
+			]
+		]
+	]
+];
+
+To use lazy set in your form element, you need to define it in each element, refer the example below where we apply `lazy-set = 1` to an element
+
+```php
+$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+```
+
+In some cases you may want to disable filters, you can do it by using `filters => false`, refer the below example where we apply `lazy-set = 2` which has an element with `filters => false`
+
+```php
+$this->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'button', 'lazy-set' => 2]);
+```
+
+
