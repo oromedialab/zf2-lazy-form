@@ -68,9 +68,11 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
     {
     	$sm = $this->getServiceLocator();
     	$config = $sm->get('oml.zf2lazyform')->config();
-        // Apply default defined global form attribute
         if (array_key_exists('*', $config)) {
-            $form = $config['*']($this);
+            // Inject form instance if * is closure
+            if (is_object($config['*']) && $config['*'] instanceof \Closure) {
+                $form = $config['*']($this);
+            }
         }
         foreach ($this->getFormElements() as $element) {
             $this->add($element);

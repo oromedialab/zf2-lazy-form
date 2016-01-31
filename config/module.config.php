@@ -17,41 +17,14 @@ return [
 			'*' => function(\Zend\Form\Form $form) {
 			},
 			'default' => [
-				'placeholder' => [
-					':min' => 10,
-					':max' => 200
-				]
+				'placeholder' => []
 			],
-			'attributes' => [
-				'submit_btn' => [
-					'type' => 'submit'
-				]
-			],
+			'attributes' => [],
 			'options' => [],
-			'validators' => [
-				'not_empty' => ['name' => 'NotEmpty'],
-				'string_length' => [
-                    'name'    => 'StringLength',
-                    'options' => array(
-                        'encoding' => 'UTF-8',
-                        'min' => ':min',
-                        'max' => ':max',
-                    )
-				]
-			],
-			'filters' => [
-				'strip_tags' => ['name' => 'StripTags'],
-                'string_trim' => ['name' => 'StringTrim']
-			],
-			'lazy-set' => [
-				1 => [
-					'validators' => ['not_empty', 'string_length'],
-					'filters' => ['strip_tags', 'string_trim']
-				],
-				2 => [
-					'attributes' => ['submit_btn'],
-					'filters' => false
-				]
+			'validators' => [],
+			'filters' => [],
+			'lazy-set' => [],
+			'error-messages' => [
 			]
 		]
 	]
