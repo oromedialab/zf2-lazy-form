@@ -255,18 +255,18 @@ Options
 ------------
 Available Options in Config File :
 
-- `$config['oml']['zf2-lazy-form']['*'] = function(\Zend\Form\Form $form){}` - Global elements and attributes
-- `$config['oml']['zf2-lazy-form']['default']['placeholder']` - Default values for placeholder
-- `$config['oml']['zf2-lazy-form']['attributes']` - Form element attributes
-- `$config['oml']['zf2-lazy-form']['options']` - Form element options
-- `$config['oml']['zf2-lazy-form']['validators']` - Form element validators
-- `$config['oml']['zf2-lazy-form']['filters']` - Form element filters
-- `$config['oml']['zf2-lazy-form']['lazy-set']` - Lazy set for reusable elements
+- `$config['oml']['zf2-lazy-form']['*'] = function(\Zend\Form\Form $form){}` : Global elements and attributes
+- `$config['oml']['zf2-lazy-form']['default']['placeholder']` : Default values for placeholder
+- `$config['oml']['zf2-lazy-form']['attributes']` : Form element attributes
+- `$config['oml']['zf2-lazy-form']['options']` : Form element options
+- `$config['oml']['zf2-lazy-form']['validators']` : Form element validators
+- `$config['oml']['zf2-lazy-form']['filters']` : Form element filters
+- `$config['oml']['zf2-lazy-form']['lazy-set']` : Lazy set for reusable elements
 
 Available Options in Form Class Extending `Oml\Zf2LazyForm\Form\Base` :
-- `addFormElement(array $params)` - Accepts name, type, label and lazy-set
-- `removeFormElement($name)` - Remove form element
-- `setPlaceholderParameter($name, $value, $elementName = null)` = Replace placeholder value for form or element
+- `addFormElement(array $params)` : Accepts name, type, label and lazy-set
+- `removeFormElement($name)` : Remove form element
+- `setPlaceholderParameter($name, $value, $elementName = null)` : Replace placeholder value for form or element
 
 Feel free to use native zend-form functions parallelly with this module if the function offered by this module does not suffice your need. it is designed to avoid conflict with existing `Zend\Form` functionality, hence allowing you to use `add()` or `addFormElement()` together in your form
 
