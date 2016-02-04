@@ -55,16 +55,16 @@ use Oml\Zf2LazyForm\Form\Base;
 
 class MyForm extends Base
 {
-	public function __construct($name = null)
+	public function init
 	{
-		parent::__construct(null);
-
-		// Add form element
+		// First Name
 		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text']);
+		// Last Name
 		$this->addFormElement(['name' => 'last_name', 'label' => 'Last name', 'type' => 'text']);
-
 		// Remove form element
 		$this->removeFormElement('last_name');
+		// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed
+		parent::init();
 	}
 }
 ```
@@ -198,15 +198,15 @@ use Oml\Zf2LazyForm\Form\Base;
 
 class MyForm extends Base
 {
-	public function __construct($name = null)
+	public function init
 	{
-		parent::__construct(null);
-
 		// Overwrite :min and :max value for this form
 		$this->setPlaceholderParameter(':min', 20);
 		$this->setPlaceholderParameter(':max', 500);
-
+		// Add form element
 		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+		// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed
+		parent::init();
 	}
 }
 ```
@@ -217,18 +217,21 @@ use Oml\Zf2LazyForm\Form\Base;
 
 class MyForm extends Base
 {
-	public function __construct($name = null)
+	public function init
 	{
-		parent::__construct(null);
-
 		// Overwrite :min and :max value for first name
 		$this->setPlaceholderParameter(':min', 20, 'first_name');
 		$this->setPlaceholderParameter(':max', 500, 'first_name');
-
+		// Add form element
 		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+		// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed
+		parent::init();
 	}
 }
 ```
+
+#### Zend\ServiceManager\ServiceManager
+You can access ServiceManager object in your `Form::init()` by using `$this->getServiceLocator()`. Because form is intiailized using `FormElementManager`, by default an instance of `ServiceManager` is injected in the form
 
 #### Global Form Elements and Attributes
 Most often we use common elements in forms such as, all forms must have a submit button, a csrf token must be included, it must contain specific class names, or bind hydator etc. this can be done easily using closure in your config file
