@@ -265,7 +265,7 @@ Available Options in Config File :
 
 Available Options in Form Class Extending `Oml\Zf2LazyForm\Form\Base` :
 - `addFormElement(array $params)` - Accepts name, type, label and lazy-set
-- `removeFormElement($name)` - - Remove form element
+- `removeFormElement($name)` - Remove form element
 - `setPlaceholderParameter($name, $value, $elementName = null)` = Replace placeholder value for form or element
 
 Feel free to use native zend-form functions parallelly with this module if the function offered by this module does not suffice your need. it is designed to avoid conflict with existing `Zend\Form` functionality, hence allowing you to use `add()` or `addFormElement()` together in your form
