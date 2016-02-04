@@ -136,16 +136,16 @@ return [
 ];
 ```
 
-To use lazy set in your form element, you need to define it in each element, refer the example below where we apply `lazy-set = 1` to an element
+To use lazy-set(s) in your form element, you need to define it in each element using an array, refer the example below where we apply `lazy-set = [1]` to an element
 
 ```php
-$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => [1]]);
 ```
 
 In some cases you may want to disable filters, you can do it by using `filters => false`, refer the below example where we apply `lazy-set = 2` which has an element with `filters => false`
 
 ```php
-$this->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'button', 'lazy-set' => 2]);
+$this->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'button', 'lazy-set' => [2]]);
 ```
 
 #### Placeholders
@@ -204,7 +204,7 @@ class MyForm extends Base
 		$this->setPlaceholderParameter(':min', 20);
 		$this->setPlaceholderParameter(':max', 500);
 		// Add form element
-		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => [1]]);
 		// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed
 		parent::init();
 	}
@@ -223,7 +223,7 @@ class MyForm extends Base
 		$this->setPlaceholderParameter(':min', 20, 'first_name');
 		$this->setPlaceholderParameter(':max', 500, 'first_name');
 		// Add form element
-		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => 1]);
+		$this->addFormElement(['name' => 'first_name', 'label' => 'First name', 'type' => 'text', 'lazy-set' => [1]]);
 		// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed
 		parent::init();
 	}
@@ -244,7 +244,7 @@ return [
 				// Apply form attribute
 				$form->setAttribute('class', 'form-horizontal form');
 				// Add an element in the form
-				$form->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'button', 'lazy-set' => 2]);
+				$form->addFormElement(['name' => 'submit', 'label' => 'Submit', 'type' => 'button', 'lazy-set' => [2]]);
 				// Set hydrator
 				$form->setHydrator(new \Zend\Stdlib\Hydrator\ClassMethods(true));
 			},
