@@ -25,6 +25,13 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
 	protected $formElements = array();
 
     /**
+     * Remove form elements from the list of array
+     *
+     * @var array $removeElements
+     */
+    protected $removeElements = array();
+
+    /**
      * User defined placeholder parameters
      *
      * @var array
@@ -93,6 +100,18 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
     }
 
     /**
+     * Remove form element
+     *
+     * @param array $element
+     * @return $this
+     */
+    public function removeFormElement($name)
+    {
+        $this->removeElements[] = $name;
+        return $this;
+    }
+
+    /**
      * Method applied from ServiceLocatorAwareInterface, required to inject service locator object
      *
      * @param ServiceLocatorInterface $sl
@@ -111,7 +130,7 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
      */
 	public function getServiceLocator()
 	{
-		return $this->serviceLocator->getServiceLocator();
+		return $this->serviceLocator ? $this->serviceLocator->getServiceLocator() : null;
 	}
 
     /**
@@ -126,6 +145,10 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
         $placeholders = $this->getPlaceholderParameters();
         $replacePlaceholderWithValues = array();
         foreach ($this->formElements as $element) {
+            // Remove form element if it is available in the remove list
+            if (in_array($element['name'], $this->removeElements)) {
+                continue;
+            }
             $formElement = $this->formatFormElement($element);
             // Replace placeholder with default values
             $replacePlaceholderWithValues = $sm->get('oml.zf2lazyform')->defaultConfig('placeholder');
@@ -179,6 +202,9 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
     protected function addInputFilter()
     {
         $sm = $this->getServiceLocator();
+        if (empty($sm)) {
+            throw new \Exception('Form must be initialized using FormElementManager, refer document for more information');
+        }
         $config = $sm->get('oml.zf2lazyform')->config();
         foreach ($this->getFormElements() as $element) {
             // If element by name filters exist with value false, do not apply the filter for the element.
