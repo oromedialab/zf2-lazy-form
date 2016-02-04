@@ -82,37 +82,43 @@ class ModuleService implements ServiceLocatorAwareInterface
      * @param string $id
      * @return array
      */
-    public function lazySet($id)
+    public function lazySet(array $sets)
     {
         $config = $this->config();
+
         if (!array_key_exists('lazy-set', $config) || !is_array($config['lazy-set'])) {
             throw new \Exception('Config with key "lazy-set" does not exist or incorrect data type given in '.__NAMESPACE__);
         }
         $lazySetConfig = $config['lazy-set'];
-        if (!array_key_exists($id, $lazySetConfig)) {
-            throw new \Exception('"lazy-set" with id "'.$id.'" does not exist in '.__NAMESPACE__);
-        }
-        $lazySet = $lazySetConfig[$id];
-        foreach ($lazySet as $type => $set) {
-            // If set is not array, skip current iteration
-            if (!is_array($set)) {
-                $lazySet[$type] = $set;
-                continue;
-            }
-            foreach ($set as $index => $attribute) {
-                $deepArray = !in_array($type, $this->deepArrayFalse);
-                $value = $this->configParser($type, $attribute);
-                if (empty($value)) {
-                    $value = array();
-                }
-                if ($deepArray) {
-                    $lazySet[$type][$index] = $value;
-                } else {
-                    $lazySet[$type] = $value;
-                }
+        foreach ($sets as $set) {
+            if (!array_key_exists($set, $lazySetConfig)) {
+                throw new \Exception('"lazy-set" with name "'.$set.'" does not exist in '.__NAMESPACE__);
             }
         }
-        return $lazySet;
+        $lazySets = array();
+        foreach ($sets as $setIdentifier) {
+            $lazySet = $lazySetConfig[$setIdentifier];
+            foreach ($lazySet as $type => $set) {
+                if (!is_array($set)) {
+                    $lazySet[$type] = $set;
+                    continue;
+                }
+                foreach ($set as $index => $attribute) {
+                    $deepArray = !in_array($type, $this->deepArrayFalse);
+                    $value = $this->configParser($type, $attribute);
+                    if (empty($value)) {
+                        $value = array();
+                    }
+                    if ($deepArray) {
+                        $lazySet[$type][$index] = $value;
+                    } else {
+                        $lazySet[$type] = $value;
+                    }
+                }
+            }
+            $lazySets = array_merge_recursive($lazySet, $lazySets);
+        }
+        return $lazySets;
     }
 
     /**
