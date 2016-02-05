@@ -1,3 +1,13 @@
+## 0.2 (In Progress)
+
+Features:
+
+  - Configurable Error Messages
+
+Bugfixes:
+
+  - Fixed error when definining the element without a label
+
 ## 0.1 (Feburary 5, 2016)
 
 Features:
