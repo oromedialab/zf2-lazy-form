@@ -1,0 +1,13 @@
+## 0.1 (Feburary 5, 2016)
+
+Features:
+
+  - Short Syntax
+  - Configurable Validators, Filters, Attrbutes & Options
+  - Lazy Set
+  - Placeholders
+  - Global Form Elements and Attributes
+
+Bugfixes:
+
+  - Fixed to display the error when form is not initialized using FormElementManager
