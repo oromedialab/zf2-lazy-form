@@ -194,7 +194,9 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
         }
         $result['name'] = $element['name'];
         $result['type'] = $element['type'];
-        $result['options']['label'] = $element['label'];
+        if (array_key_exists('label', $element)) {
+            $result['options']['label'] = $element['label'];
+        }
         return $result;
     }
 
