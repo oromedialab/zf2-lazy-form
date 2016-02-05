@@ -9,8 +9,8 @@
 return [
 	'service_manager' => [
         'invokables' => [
-            'oml.zf2lazyform' => 'Oml\Zf2LazyForm\Service\ModuleService',
-        ],
+            'Oml\Zf2LazyForm\Service\ModuleService' => 'Oml\Zf2LazyForm\Service\ModuleService',
+        ]
     ],
 	'oml' => [
 		'zf2-lazy-form' => [
