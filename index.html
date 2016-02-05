@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>ZF2 Lazy Form by oromedialab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">ZF2 Lazy Form</h1>
+      <h2 class="project-tagline">Lazy Form for Zend Framework 2</h2>
+      <a href="https://github.com/oromedialab/zf2-lazy-form" class="btn">View on GitHub</a>
+      <a href="https://github.com/oromedialab/zf2-lazy-form/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/oromedialab/zf2-lazy-form/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="lazy-form-for-zend-framework-2" class="anchor" href="#lazy-form-for-zend-framework-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lazy Form for Zend Framework 2</h1>
+
+<p>Developed and Maintained by Ibrahim Azhar Armar</p>
+
+<p><a href="https://gitter.im/oromedialab/zf2-lazy-form?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/oromedialab/zf2-lazy-form.svg" alt="Gitter"></a></p>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>Did you ever get frustrated by the fact that you have to repeat the same validators, filters, attributes and options over and over again in different forms and elements leading to code duplication and maintenance nightmare? we have read numerous time about <a href="https://en.wikipedia.org/wiki/Don't_repeat_yourself">DRY - Don't repeat yourself</a> or <a href="http://c2.com/cgi/wiki?OnceAndOnlyOnce">OAOO - Once and Only Once</a>, but do we really follow it?</p>
+
+<p>Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We enhanced the module to support numerous features on top of existing features of zend-form</p>
+
+<ul>
+<li><a href="https://github.com/oromedialab/zf2-lazy-form#short-syntax">Short Syntax</a></li>
+<li><a href="https://github.com/oromedialab/zf2-lazy-form#configurable-validators-filters-attrbutes--options">Configurable Validators, Filters, Attrbutes &amp; Options</a></li>
+<li><a href="https://github.com/oromedialab/zf2-lazy-form#lazy-set">Lazy Set</a></li>
+<li><a href="https://github.com/oromedialab/zf2-lazy-form#placeholders">Placeholders</a></li>
+<li><a href="https://github.com/oromedialab/zf2-lazy-form#global-form-elements-and-attributes">Global Form Elements and Attributes</a></li>
+<li>
+<a href="#">Configurable Error Messages</a> - <a href="https://github.com/TODO" class="user-mention">@TODO</a>
+</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<h4>
+<a id="install-using-composer" class="anchor" href="#install-using-composer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install using composer</h4>
+
+<pre><code>composer require oromedialab/zf2-lazy-form dev-master
+</code></pre>
+
+<h4>
+<a id="install-using-git-clone" class="anchor" href="#install-using-git-clone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Install using GIT clone</h4>
+
+<pre><code>git clone https://github.com/oromedialab/zf2-lazy-form.git
+</code></pre>
+
+<h4>
+<a id="enable-zf2-module" class="anchor" href="#enable-zf2-module" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Enable Zf2 Module</h4>
+
+<p>Enable the module by adding <code>Oml\Zf2LazyForm</code> in your <code>config/application.config.php</code> file.</p>
+
+<h2>
+<a id="important-instruction" class="anchor" href="#important-instruction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Important Instruction</h2>
+
+<p>Form must be initialized using FormElementManager, lets see an example </p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// Correct approach</span></span>
+<span class="pl-s1"><span class="pl-smi">$sm</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>getServiceLocator();</span>
+<span class="pl-s1"><span class="pl-smi">$form</span> <span class="pl-k">=</span> <span class="pl-smi">$sm</span><span class="pl-k">-&gt;</span>get(<span class="pl-s"><span class="pl-pds">'</span>FormElementManager<span class="pl-pds">'</span></span>)<span class="pl-k">-&gt;</span>get(<span class="pl-s"><span class="pl-pds">'</span>User\Form\Create<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-c">// Incorrect approach</span></span>
+<span class="pl-s1"><span class="pl-smi">$sm</span> <span class="pl-k">=</span> <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>getServiceLocator();</span>
+<span class="pl-s1"><span class="pl-smi">$form</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">User\Form\</span><span class="pl-c1">Create</span>();</span></pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<h4>
+<a id="short-syntax" class="anchor" href="#short-syntax" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Short Syntax</h4>
+
+<p>Let's consider the below example to define form element using short syntax</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Oml\Zf2LazyForm\Form\Base</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">MyForm</span> <span class="pl-k">extends</span> <span class="pl-e">Base</span></span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-c1">init</span></span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-c">// First Name</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>first_name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>First name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>]);</span>
+<span class="pl-s1">        <span class="pl-c">// Last Name</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>last_name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>Last name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>]);</span>
+<span class="pl-s1">        <span class="pl-c">// Remove form element</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>removeFormElement(<span class="pl-s"><span class="pl-pds">'</span>last_name<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">        <span class="pl-c">// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed</span></span>
+<span class="pl-s1">        <span class="pl-k">parent</span><span class="pl-k">::</span>init();</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>When an element is defined using <code>addFormElement()</code> by default empty input filters are injected, you don't have to worry about defining input filters separately. To be precise you never define input filters in form again, instead you define it in the config file and reuse it across forms and elements, we'll see an example of this below</p>
+
+<p>You can also use <a href="http://framework.zend.com/manual/current/en/modules/zend.form.advanced-use-of-forms.html#short-names">short names</a> offered by ZF2, instead of writing <code>Zend\Form\Element\Text</code> for defining form elements, you can just type <code>text</code>, same goes for rest of elements</p>
+
+<h4>
+<a id="configurable-validators-filters-attrbutes--options" class="anchor" href="#configurable-validators-filters-attrbutes--options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configurable Validators, Filters, Attrbutes &amp; Options</h4>
+
+<p>Define validators, filters, attributes and options in config file to reuse it across forms and elements. the syntax is same as what you use in zend-form</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">return</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>oml<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>zf2-lazy-form<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>validators<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>not-empty<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>NotEmpty<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>string-length<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>StringLength<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>options<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>encoding<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>UTF-8<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>min<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">2</span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>max<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">255</span></span>
+<span class="pl-s1">                    )</span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            ],</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>filters<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>strip-tags<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>StripTags<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>string-trim<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>StringTrim<span class="pl-pds">'</span></span>]</span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>attributes<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>submit-btn<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>submit<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>submit-btn<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            ],</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>options<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>label-option<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>label_attributes<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>col-sm-2 font_16<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">                    ]</span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span></pre></div>
+
+<h4>
+<a id="lazy-set" class="anchor" href="#lazy-set" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lazy Set</h4>
+
+<p>Once configuration is defined, it can be reused using lazy-set</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">return</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>oml<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>zf2-lazy-form<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>lazy-set<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-c1">1</span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>validators<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>not-empty<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>string-length<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>filters<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>strip-tags<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>string-trim<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>attributes<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>submit-btn<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>options<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>label-option<span class="pl-pds">'</span></span>]</span>
+<span class="pl-s1">                ],</span>
+<span class="pl-s1">                <span class="pl-c1">2</span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>attributes<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>submit-btn<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>filters<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span></span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span></pre></div>
+
+<p>To use lazy-set(s) in your form element, you need to define it in each element using an array, refer the example below where we apply <code>lazy-set = [1]</code> to an element</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>first_name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>First name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>lazy-set<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">1</span>]]);</span></pre></div>
+
+<p>In some cases you may want to disable filters, you can do it by using <code>filters =&gt; false</code>, refer the below example where we apply <code>lazy-set = 2</code> which has an element with <code>filters =&gt; false</code></p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>submit<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>Submit<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>button<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>lazy-set<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">2</span>]]);</span></pre></div>
+
+<h4>
+<a id="placeholders" class="anchor" href="#placeholders" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Placeholders</h4>
+
+<p>In many instances you may want to define different validation values for a given validator. Lets consider <code>StringLength</code> where it makes sense to have a default minimum and maximum length for all form elements, however for specific element we may want to overwrite it with specific values, this is where <code>Placeholders</code> comes to our rescue, lets see some example</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">return</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>oml<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>zf2-lazy-form<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>validators<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>not_empty<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>NotEmpty<span class="pl-pds">'</span></span>],</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>string_length<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>StringLength<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>options<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">array</span>(</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>encoding<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>UTF-8<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>min<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>:min<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                        <span class="pl-s"><span class="pl-pds">'</span>max<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>:max<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                    )</span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span></pre></div>
+
+<p>The defined placeholder <code>:min</code> and <code>:max</code> in above configuration can be replaced on 3 level</p>
+
+<ul>
+<li>Global</li>
+<li>Form</li>
+<li>Element</li>
+</ul>
+
+<p>Replace placeholder value on a global level</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-c">// Apply global placeholder</span></span>
+<span class="pl-s1"><span class="pl-k">return</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>oml<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>zf2-lazy-form<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>placeholder<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>:min<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">2</span>,</span>
+<span class="pl-s1">                    <span class="pl-s"><span class="pl-pds">'</span>:max<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-c1">200</span></span>
+<span class="pl-s1">                ]</span>
+<span class="pl-s1">            ]</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span></pre></div>
+
+<p>Replace placeholder value on a form level</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Oml\Zf2LazyForm\Form\Base</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">MyForm</span> <span class="pl-k">extends</span> <span class="pl-e">Base</span></span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-c1">init</span></span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-c">// Overwrite :min and :max value for this form</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>setPlaceholderParameter(<span class="pl-s"><span class="pl-pds">'</span>:min<span class="pl-pds">'</span></span>, <span class="pl-c1">20</span>);</span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>setPlaceholderParameter(<span class="pl-s"><span class="pl-pds">'</span>:max<span class="pl-pds">'</span></span>, <span class="pl-c1">500</span>);</span>
+<span class="pl-s1">        <span class="pl-c">// Add form element</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>first_name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>First name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>lazy-set<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">1</span>]]);</span>
+<span class="pl-s1">        <span class="pl-c">// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed</span></span>
+<span class="pl-s1">        <span class="pl-k">parent</span><span class="pl-k">::</span>init();</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<p>Replace placeholder value per element</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">Oml\Zf2LazyForm\Form\Base</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">class</span> <span class="pl-en">MyForm</span> <span class="pl-k">extends</span> <span class="pl-e">Base</span></span>
+<span class="pl-s1">{</span>
+<span class="pl-s1">    <span class="pl-k">public</span> <span class="pl-k">function</span> <span class="pl-c1">init</span></span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        <span class="pl-c">// Overwrite :min and :max value for first name</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>setPlaceholderParameter(<span class="pl-s"><span class="pl-pds">'</span>:min<span class="pl-pds">'</span></span>, <span class="pl-c1">20</span>, <span class="pl-s"><span class="pl-pds">'</span>first_name<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>setPlaceholderParameter(<span class="pl-s"><span class="pl-pds">'</span>:max<span class="pl-pds">'</span></span>, <span class="pl-c1">500</span>, <span class="pl-s"><span class="pl-pds">'</span>first_name<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">        <span class="pl-c">// Add form element</span></span>
+<span class="pl-s1">        <span class="pl-smi">$this</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>first_name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>First name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>text<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>lazy-set<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">1</span>]]);</span>
+<span class="pl-s1">        <span class="pl-c">// It is IMPORTANT to call parent::init() in the bottom, failing to add this will end-up in form not being displayed</span></span>
+<span class="pl-s1">        <span class="pl-k">parent</span><span class="pl-k">::</span>init();</span>
+<span class="pl-s1">    }</span>
+<span class="pl-s1">}</span></pre></div>
+
+<h4>
+<a id="zendservicemanagerservicemanager" class="anchor" href="#zendservicemanagerservicemanager" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Zend\ServiceManager\ServiceManager</h4>
+
+<p>You can access ServiceManager object in your <code>Form::init()</code> by using <code>$this-&gt;getServiceLocator()</code>. Because form is intiailized using <code>FormElementManager</code>, by default an instance of <code>ServiceManager</code> is injected in the form</p>
+
+<h4>
+<a id="global-form-elements-and-attributes" class="anchor" href="#global-form-elements-and-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Global Form Elements and Attributes</h4>
+
+<p>Most often we use common elements in forms such as, all forms must have a submit button, a csrf token must be included, it must contain specific class names, or bind hydator etc. this can be done easily using closure in your config file</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">return</span> [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>oml<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>zf2-lazy-form<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">            <span class="pl-s"><span class="pl-pds">'</span>*<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-k">function</span>(<span class="pl-c1">\Zend\Form\</span><span class="pl-c1">Form</span> <span class="pl-smi">$form</span>) {</span>
+<span class="pl-s1">                <span class="pl-c">// Apply form attribute</span></span>
+<span class="pl-s1">                <span class="pl-smi">$form</span><span class="pl-k">-&gt;</span>setAttribute(<span class="pl-s"><span class="pl-pds">'</span>class<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>form-horizontal form<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">                <span class="pl-c">// Add an element in the form</span></span>
+<span class="pl-s1">                <span class="pl-smi">$form</span><span class="pl-k">-&gt;</span>addFormElement([<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>submit<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>label<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>Submit<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>type<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>button<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>lazy-set<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [<span class="pl-c1">2</span>]]);</span>
+<span class="pl-s1">                <span class="pl-c">// Set hydrator</span></span>
+<span class="pl-s1">                <span class="pl-smi">$form</span><span class="pl-k">-&gt;</span>setHydrator(<span class="pl-k">new</span> <span class="pl-c1">\Zend\Stdlib\Hydrator\</span><span class="pl-c1">ClassMethods</span>(<span class="pl-c1">true</span>));</span>
+<span class="pl-s1">            },</span>
+<span class="pl-s1">        ]</span>
+<span class="pl-s1">    ]</span>
+<span class="pl-s1">];</span></pre></div>
+
+<p>An instance of <code>Zend\Form</code> is injected by default when you define <code>$config['oml']['zf2-lazy-form'][*]</code> with closure, this allows you to modify or add elements to the form on a global level, you can also use <code>addFormElement()</code> or other available module functions here</p>
+
+<h2>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Options</h2>
+
+<p>Available Options in Config File :</p>
+
+<ul>
+<li>
+<code>$config['oml']['zf2-lazy-form']['*'] = function(\Zend\Form\Form $form){}</code> : Global elements and attributes</li>
+<li>
+<code>$config['oml']['zf2-lazy-form']['default']['placeholder']</code> : Default values for placeholder</li>
+<li>
+<code>$config['oml']['zf2-lazy-form']['attributes']</code> : Form element attributes</li>
+<li>
+<code>$config['oml']['zf2-lazy-form']['options']</code> : Form element options</li>
+<li>
+<code>$config['oml']['zf2-lazy-form']['validators']</code> : Form element validators</li>
+<li>
+<code>$config['oml']['zf2-lazy-form']['filters']</code> : Form element filters</li>
+<li>
+<code>$config['oml']['zf2-lazy-form']['lazy-set']</code> : Lazy set for reusable elements</li>
+</ul>
+
+<p>Available Options in Form Class Extending <code>Oml\Zf2LazyForm\Form\Base</code> :</p>
+
+<ul>
+<li>
+<code>addFormElement(array $params)</code> : Accepts name, type, label and lazy-set</li>
+<li>
+<code>removeFormElement($name)</code> : Remove form element</li>
+<li>
+<code>setPlaceholderParameter($name, $value, $elementName = null)</code> : Replace placeholder value for form or element</li>
+</ul>
+
+<p>Feel free to use native zend-form functions parallelly with this module if the function offered by this module does not suffice your need. it is designed to avoid conflict with existing <code>Zend\Form</code> functionality, hence allowing you to use <code>add()</code> or <code>addFormElement()</code> together in your form</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/oromedialab/zf2-lazy-form">ZF2 Lazy Form</a> is maintained by <a href="https://github.com/oromedialab">oromedialab</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
