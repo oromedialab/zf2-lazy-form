@@ -4,6 +4,7 @@ Features:
 
   - Configurable Error Messages
   - Add options to form elements such as priority of an element
+  - `Form::replaceFormElement(array $element, $options = array())` - Replace form element in extended form instead of using add/remove
 
 Bugfixes:
 
