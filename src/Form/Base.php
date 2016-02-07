@@ -118,6 +118,9 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
      */
     public function addFormElement(array $element, $options = array())
     {
+        if (array_key_exists($element['name'], $this->formElements)) {
+            throw new \Exception('Form element "'.$element['name'].'" is already added, use replaceFormElement() or removeElement() instead');
+        }
     	$this->formElements[$element['name']] = $element;
         if (!empty($options) && is_array($options)) {
             $this->formElementOptions[$element['name']] = $options;
@@ -134,6 +137,23 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
     public function removeFormElement($name)
     {
         $this->removeElements[] = $name;
+        return $this;
+    }
+
+    /**
+     * Replace existing form element, this methid is same as addFormElement with two difference
+     *   1. This does not throw an error if element with same name exist
+     *   2. Using removeFormElement() and addFormElement() for an element in the same form does not work, to remove confusion this element is introduced
+     *
+     * @param array $element
+     * @return $this
+     */
+    public function replaceFormElement(array $element, $options = array())
+    {
+        $this->formElements[$element['name']] = $element;
+        if (!empty($options) && is_array($options)) {
+            $this->formElementOptions[$element['name']] = $options;
+        }
         return $this;
     }
 
