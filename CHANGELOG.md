@@ -3,10 +3,12 @@
 Features:
 
   - Configurable Error Messages
+  - Add options to form elements such as priority of an element
 
 Bugfixes:
 
   - Fixed error when definining the element without a label
+  - Added final to constructor and init method
 
 ## 0.1 (Feburary 5, 2016)
 
