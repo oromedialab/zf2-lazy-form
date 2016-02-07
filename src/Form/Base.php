@@ -24,6 +24,8 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
      */
 	protected $formElements = array();
 
+    protected $formElementOptions = array();
+
     /**
      * Remove form elements from the list of array
      *
@@ -64,7 +66,7 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
      *
      * @param string $name
      */
-	public function __construct($name = null)
+	final public function __construct($name = null)
 	{
         parent::__construct(null);
         $this->inputFilter  = new InputFilter();
@@ -78,19 +80,33 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
      *
      * @return $this
      */
-    public function init()
+    final public function init()
     {
-    	$sm = $this->getServiceLocator();
-    	$config = $sm->get($this->moduleService)->config();
+        $sm = $this->getServiceLocator();
+        $config = $sm->get($this->moduleService)->config();
         if (array_key_exists('*', $config)) {
             // Inject form instance if * is closure
             if (is_object($config['*']) && $config['*'] instanceof \Closure) {
                 $form = $config['*']($this);
             }
         }
+        $this->initialize();
+        // Initialize form elements
         foreach ($this->getFormElements() as $element) {
-            $this->add($element);
+            $elementOptions = array();
+            if (array_key_exists($element['name'], $this->formElementOptions)) {
+                $elementOptions = $this->formElementOptions[$element['name']];
+            }
+            $this->add($element, $elementOptions);
         }
+        return $this;
+    }
+
+    /**
+     * Form initialazation method
+     */
+    public function initialize()
+    {
         return $this;
     }
 
@@ -100,9 +116,12 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
      * @param array $element
      * @return $this
      */
-    public function addFormElement(array $element)
+    public function addFormElement(array $element, $options = array())
     {
-    	$this->formElements[] = $element;
+    	$this->formElements[$element['name']] = $element;
+        if (!empty($options) && is_array($options)) {
+            $this->formElementOptions[$element['name']] = $options;
+        }
         return $this;
     }
 
@@ -171,7 +190,6 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
                         $replacePlaceholderWithValues = array_merge($replacePlaceholderWithValues, $placeholders['element'][$element['name']]);
                     }
                 }
-
             }
             $formElement = $this->searchAndReplacePlaceHolders($formElement, $replacePlaceholderWithValues);
             $formElements[] = $formElement;
