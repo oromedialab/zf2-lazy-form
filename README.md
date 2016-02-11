@@ -1,4 +1,4 @@
-Lazy Form for Zend Framework 2 - Fall in love with Zend Form. Again!
+Fall in love with Zend Form. Again!
 =============
 Developed and Maintained by Ibrahim Azhar Armar
 
