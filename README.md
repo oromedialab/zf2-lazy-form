@@ -1,4 +1,4 @@
-Lazy Form for Zend Framework 2
+Lazy Form for Zend Framework 2 - Fall in love with Zend Form. Again!
 =============
 Developed and Maintained by Ibrahim Azhar Armar
 
@@ -6,9 +6,7 @@ Developed and Maintained by Ibrahim Azhar Armar
 
 Introduction
 ------------
-Did you ever get frustrated by the fact that you have to repeat the same validators, filters, attributes and options over and over again in different forms and elements leading to code duplication and maintenance nightmare? we have read numerous time about [DRY - Don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself) or [OAOO - Once and Only Once](http://c2.com/cgi/wiki?OnceAndOnlyOnce), but do we really follow it?
-
-Zf2LazyForm module is developed to eliminate duplication and encourage reuse. We enhanced the module to support numerous features on top of existing features of zend-form
+Zf2LazyForm module is developed to eliminate duplication and enforce reuse for elements, validators, filters, attributes, options etc. We enhanced the module to support numerous features on top of existing features of zend-form
 * [Short Syntax](https://github.com/oromedialab/zf2-lazy-form#short-syntax)
 * [Configurable Validators, Filters, Attrbutes & Options](https://github.com/oromedialab/zf2-lazy-form#configurable-validators-filters-attrbutes--options)
 * [Lazy Set](https://github.com/oromedialab/zf2-lazy-form#lazy-set)
