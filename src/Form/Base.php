@@ -265,6 +265,12 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
                     if (in_array($validator['name'], array('NotEmpty'))) {
                         $element['required'] = true;
                     }
+                    // Allow validation on empty values for Callback validator
+                    if (in_array($validator['name'], array('Callback'))) {
+                        $callBackValidatorExist = true;
+                        $element['allow_empty'] = true;
+                        $element['continue_if_empty'] = true;
+                    }
                 }
             }
             if (array_key_exists('type', $element)) {
