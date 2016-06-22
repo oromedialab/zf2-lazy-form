@@ -97,6 +97,13 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
             if (array_key_exists($element['name'], $this->formElementOptions)) {
                 $elementOptions = $this->formElementOptions[$element['name']];
             }
+            // Add id attribute for each element
+            if (!array_key_exists('attributes', $element)) {
+                $element['attributes'] = array();
+                $element['attributes'] ['id'] = $element['name'];
+            } else {
+                $element['attributes'] ['id'] = $element['name'];
+            }
             $this->add($element, $elementOptions);
         }
         return $this;
