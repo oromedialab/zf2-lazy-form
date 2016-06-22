@@ -283,6 +283,8 @@ abstract class Base extends Form implements ServiceLocatorAwareInterface
             if (array_key_exists('type', $element)) {
                 unset($element['type']);
             }
+            $element['allow_empty'] = true;
+            $element['continue_if_empty'] = true;
             $this->inputFilter->add($this->inputFactory->createInput($element));
         }
         return $this->inputFilter;
